@@ -5,6 +5,7 @@ stages:
 
 before_script:
   - apk -U add ca-certificates aws-cli
+  - apk -U add aws-cli
 
 gitlab_pages:
   stage: deploy
