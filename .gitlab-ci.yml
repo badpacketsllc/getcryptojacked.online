@@ -4,8 +4,7 @@ stages:
   - deploy
 
 before_script:
-  - cat /etc/apk/repositories
-  - apk update
+  - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
   - apk -U add ca-certificates aws-cli
 
 gitlab_pages:
